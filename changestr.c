@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 void change_str(char string[],int len1);
 int lenstr(char string[]);
@@ -6,6 +7,9 @@ int lenstr(char string[]);
 int main()
 {
 	char str[]="King Lebron James ";
+	printf("%s\n",str);
+	strcpy(str,"Lakers Lebron");
+	printf("%s\n",str);
 	int len;
 	len=lenstr(str);
 	change_str(str,len);	
