@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> 
 #include <string.h>
 
 #define WORD 4
@@ -26,8 +26,8 @@ int main()
 		{"block","블락"}
 	};
 	int select;
-	select=choosedic(D3_dic,D2_pa);
-	if((select==1)||(select==2))
+	select=choosedic();
+	if((select==0)||(select==1))
 	{
 		D3_search(D3_dic,select);
 	}
@@ -41,14 +41,13 @@ int main()
 
 int choosedic(void)
 {
-	int select1=1;
+	int select1;
 	int select2;
-	while( (select1!=1)||(select1!=2))
+	do
 	{
 		printf("choose between dictionary1(1) and dictionary2(2): ");
 		scanf("%d",&select1);
-		printf("%d\n",select1);
-	}
+	}while( (select1!=1)&&(select1!=2));
 	select2=dic_version(select1);
 	return select2;
 }
@@ -57,9 +56,9 @@ int dic_version(int a)
 {
 	int select;
 	int code;
-	while( (select!=1)||(select!=2))
+	while( (select!=1)&&(select!=2))
 	{
-		printf("choose between english korean dictionary and korean english dictionary");
+		printf("choose between english korean dictionary and korean english dictionary: ");
 		scanf("%d",&select);
 	}
 	if (a==1)
@@ -91,13 +90,14 @@ void D3_search(char D3[WORD][LANGUAGE][MAX],int code)
 {
 	char search[MAX];
 	char answer[MAX];
-	scanf("search: %s",search);
-	for (int i=0;i<WORD;i++)
+	printf("search: ");
+	scanf("%s",search);
+	for (int i=0 ; i<WORD ; i++)
 	{
 		if (strcmp(D3[i][code],search)==0)
 		{
 			strcpy(answer,D3[i][1-code]);
-			printf("means: %s",answer);
+			printf("means: %s\n",answer);
 		}
 	}
 }
@@ -106,13 +106,14 @@ void D2_pa_search(char* D2_pa[WORD][LANGUAGE],int code)
 {
 	char* search;
 	char* answer;
-	scanf("search: %s",search);
+	printf("search: ");
+	scanf("%s",search);
 	for (int i=0;i<WORD;i++)
 	{
 		if (search==D2_pa[i][code-2])
 		{
 			answer=D2_pa[i][3-code];
-			printf("means: %s",answer);
+			printf("means: %s\n",answer);
 		}
 	}
 }
