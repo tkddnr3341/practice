@@ -58,7 +58,7 @@ int dic_version(int a)
 	int code;
 	while( (select!=1)&&(select!=2))
 	{
-		printf("choose between english korean dictionary and korean english dictionary: ");
+		printf("choose between english korean dictionary(1) and korean english dictionary(2): ");
 		scanf("%d",&select);
 	}
 	if (a==1)
@@ -90,16 +90,26 @@ void D3_search(char D3[WORD][LANGUAGE][MAX],int code)
 {
 	char search[MAX];
 	char answer[MAX];
+	int found;
+	int i=0;
 	printf("search: ");
 	scanf("%s",search);
-	for (int i=0 ; i<WORD ; i++)
+	do
 	{
-		if (strcmp(D3[i][code],search)==0)
-		{
-			strcpy(answer,D3[i][1-code]);
-			printf("means: %s\n",answer);
-		}
+		found = strcmp( D3[i][code] , search );
+		i++;
+	}while( (found!=0) && (i<WORD) );
+	
+	if (found!=0)
+	{
+		printf("word is not listed in dictionary\n");
 	}
+	else 
+	{
+		strcpy(answer , D3[i-1][1-code]);
+		printf("means: %s\n",answer);
+	}
+
 }
 	
 void D2_pa_search(char* D2_pa[WORD][LANGUAGE],int code)
@@ -108,6 +118,7 @@ void D2_pa_search(char* D2_pa[WORD][LANGUAGE],int code)
 	char* answer;
 	printf("search: ");
 	scanf("%s",search);
+	printf("%s\n",search);
 	for (int i=0;i<WORD;i++)
 	{
 		if (search==D2_pa[i][code-2])
